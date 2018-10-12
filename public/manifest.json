@@ -1,0 +1,9 @@
+{
+  "short_name": "D&D generator",
+  "name": "D&D generator",
+  
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#34373a"
+}
