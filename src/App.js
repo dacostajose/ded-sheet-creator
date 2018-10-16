@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TextField, Grid, NativeSelect, FormControl, InputLabel} from '@material-ui/core';
+import {TextField, Grid, NativeSelect, FormControl, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails} from '@material-ui/core';
 
 class App extends Component {
   constructor(props) {
@@ -9,6 +9,8 @@ class App extends Component {
       antecedente:"",
       classes:[],
       raceArray:[],
+      skillsArray:[],
+      reponse:"",
       classSelected:"",
       raceSelected:"",
       str:'',
@@ -19,6 +21,7 @@ class App extends Component {
       cha:'',
     };
     this.modifyParamsCalc= this.modifyParamsCalc.bind(this)
+    this.infoSkills= this.infoSkills.bind(this)
   }
 
   
@@ -30,40 +33,74 @@ class App extends Component {
     let raceArray= await fetch('http://www.dnd5eapi.co/api/races/')
     let jsonRaces= await raceArray.json()
 
-    let abilityArray= await fetch('http://www.dnd5eapi.co/api/ability-scores/')
-    let jsonability= await abilityArray.json()
+    let skillsArray= await fetch('http://www.dnd5eapi.co/api/skills')
+    let jsonSkills= await skillsArray.json()
+
 
     this.setState({
       classes:jsonClasses.results, 
       raceArray: jsonRaces.results,
-      abilityArray: jsonability.results,
+      skillsArray: jsonSkills.results,
     })
-    console.log(this.state.abilityArray)
+   
   }
+
   
   modifyParamsCalc(i){
-  if(i==1)return (-5);
-  if(i==2 || i==3) return(-4);
-  if(i==4 || i==5) return(-3);
-  if(i==6 || i==7) return(-2);
-  if(i==8 || i==9) return(-1);
-  if(i==10 || i==11) return(0);
-  if(i==12 || i==13) return(1);
-  if(i==14 || i==15) return(2);
-  if(i==16 || i==17) return(3);
-  if(i==18 || i==19) return(4);
-  if(i==20 || i==21) return(5);
-  if(i==22 || i==23) return(6);
-  if(i==24 || i==25) return(7);
-  if(i==26 || i==27) return(8);
-  if(i==28 || i==29) return(9);
-  if(i==30) return(10);
+      // eslint-disable-next-line
+    if(i==1)return (-5);
+    // eslint-disable-next-line
+    if(i==2 || i==3) return(-4);
+    // eslint-disable-next-line
+    if(i==4 || i==5) return(-3);
+    // eslint-disable-next-line
+    if(i==6 || i==7) return(-2);
+    // eslint-disable-next-line
+    if(i==8 || i==9) return(-1);
+    // eslint-disable-next-line
+    if(i==10 || i==11) return(0);
+    // eslint-disable-next-line
+    if(i==12 || i==13) return(1);
+    // eslint-disable-next-line
+    if(i==14 || i==15) return(2);
+    // eslint-disable-next-line
+    if(i==16 || i==17) return(3);
+    // eslint-disable-next-line
+    if(i==18 || i==19) return(4);
+    // eslint-disable-next-line
+    if(i==20 || i==21) return(5);
+    // eslint-disable-next-line
+    if(i==22 || i==23) return(6);
+    // eslint-disable-next-line
+    if(i==24 || i==25) return(7);
+    // eslint-disable-next-line
+    if(i==26 || i==27) return(8);
+    // eslint-disable-next-line
+    if(i==28 || i==29) return(9);
+    // eslint-disable-next-line
+    if(i==30) return(10);
 
-        
+
    
     
   }
 
+  
+  
+  async infoSkills(url){
+    console.log("asd") 
+    this.setState({
+      reponse:"Carregando..."
+    })
+    let reponse= await fetch(url)
+    let jsonreponse= await reponse.json()
+   
+    this.setState({
+      reponse:jsonreponse.desc
+    })
+
+   
+  }
   
   render() {
     return (
@@ -253,6 +290,28 @@ class App extends Component {
               />
 
         </Grid>
+      
+        <Grid  item xs={6} >
+        <p>Pericias</p>
+
+        <div style={{maxHeight:"30%", overflowY:'scroll', height:"30%"}}>
+          {this.state.skillsArray.map(skillsArray => (
+
+          <ExpansionPanel key={skillsArray.url} onClick={()=>{this.infoSkills(skillsArray.url)}}>
+          <ExpansionPanelSummary expandIcon={'+'}>
+            <p>{skillsArray.name}</p>  
+          </ExpansionPanelSummary>
+          
+          <ExpansionPanelDetails >
+              {this.state.reponse}
+          
+          </ExpansionPanelDetails>
+          </ExpansionPanel>
+            
+          ))}
+        </div>
+        </Grid>
+
       </Grid>
     );
   }
