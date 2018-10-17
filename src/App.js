@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TextField, Grid, NativeSelect, FormControl, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails} from '@material-ui/core';
+import {TextField, Grid, NativeSelect, FormControl, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button} from '@material-ui/core';
 
 class App extends Component {
   constructor(props) {
@@ -160,19 +160,25 @@ class App extends Component {
               </NativeSelect>
           </FormControl>
       </Grid>
-      <Grid item xs={2} style={{height:"50%", minHeight:"50%"}}>
+      <Grid item xs={4} style={{height:"50%", minHeight:"50%"}}>
         <p>Pontos de habilidade</p>
+       <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
-          required
-          type="number"
-          style={{marginRight:10}}
-          id="standard-required"
-          label="Força"
-          margin="normal"
-          onChange={(event)=>{this.setState({str: event.target.value});}}
-          value={this.state.str}
-        />
+            required
+            type="number"
+            style={{marginRight:10}}
+            id="standard-required"
+            label="Força"
+            margin="normal"
+            onChange={(event)=>{this.setState({str: event.target.value});}}
+            value={this.state.str}
+          />
+          <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({str:Math.round (Math.random() * (1, 21))}) }}>
+              Rolar dado Virtual
+          </Button>
+       </div>
 
+       <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
           required
           style={{marginRight:10}}
@@ -184,6 +190,11 @@ class App extends Component {
           value={this.state.dex}
         />
 
+        <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({dex:Math.round (Math.random() * (1, 21))}) }}>
+            Rolar dado Virtual
+        </Button>
+      </div>
+       <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
           required
           type="number"
@@ -195,7 +206,11 @@ class App extends Component {
           onChange={(event)=>{this.setState({con: event.target.value});}}
           value={this.state.con}
         />
-
+        <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({con:Math.round (Math.random() * (1, 21))}) }}>
+          Rolar dado Virtual
+        </Button>
+        </div>
+       <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
           type="number"
           required
@@ -206,7 +221,11 @@ class App extends Component {
           onChange={(event)=>{this.setState({int: event.target.value});}}
           value={this.state.int}
         />
-
+        <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({int:Math.round (Math.random() * (1, 21))}) }}>
+            Rolar dado Virtual
+        </Button>
+      </div>
+       <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
           required
           type="number"
@@ -218,7 +237,11 @@ class App extends Component {
           onChange={(event)=>{this.setState({wis: event.target.value});}}
           value={this.state.wis}
         />
-
+        <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({wis:Math.round (Math.random() * (1, 21))}) }}>
+            Rolar dado Virtual
+        </Button>
+        </div>
+        <div style={{flexDirection:'row', whiteSpace:'nowrap'}}>
         <TextField
           required
 
@@ -230,7 +253,10 @@ class App extends Component {
           onChange={(event)=>{this.setState({cha: event.target.value});}}
           value={this.state.cha}
         />
-
+          <Button variant="contained" style={{marginTop:30, backgroundColor:"#f44336", color:"#fff"}} onClick={()=>{ this.setState({cha:Math.round (Math.random() * (1, 21))}) }}>
+            Rolar dado Virtual
+          </Button>
+        </div>
       </Grid>
             <Grid item xs={1} style={{height:"50%", minHeight:"50%"}}>
             <p>Bonus</p>
@@ -288,7 +314,7 @@ class App extends Component {
                 disabled
                 value={this.modifyParamsCalc(this.state.cha)}
               />
-
+       
         </Grid>
       
         <Grid  item xs={6} >
