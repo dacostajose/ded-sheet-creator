@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {TextField, Grid, NativeSelect, FormControl, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button} from '@material-ui/core';
-
+import Spells from './magics';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +104,8 @@ class App extends Component {
   
   render() {
     return (
-      <Grid container spacing={16}>
+      <Grid container>
+      <Grid container spacing={16} direction="row"/>
       <Grid item xs={12}>
         <TextField
           style={{marginRight:10}}
@@ -317,10 +318,10 @@ class App extends Component {
        
         </Grid>
       
-        <Grid  item xs={6} >
+        <Grid  item xs={6} style={{height:450}}>
         <p>Pericias</p>
 
-        <div style={{maxHeight:"30%", overflowY:'scroll', height:"30%"}}>
+        <div style={{maxHeight:"100%", overflowY:'scroll'}}>
           {this.state.skillsArray.map(skillsArray => (
 
           <ExpansionPanel key={skillsArray.url} onClick={()=>{this.infoSkills(skillsArray.url)}}>
@@ -336,9 +337,14 @@ class App extends Component {
             
           ))}
         </div>
+      
         </Grid>
-
+        <Grid spacing={24} direction="row">
+          <Grid item xs={6} style={{height:450}}><Spells/></Grid>
+          
+        </Grid>
       </Grid>
+      
     );
   }
 }
